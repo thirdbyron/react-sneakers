@@ -1,17 +1,19 @@
+import { useState } from "react";
+import { Content } from "./components/Content";
 import { Drawer } from "./components/Drawer";
 import { Footer } from "./components/Footer";
-import { ItemsList } from "./components/Items-list";
 import { MainHeader } from "./components/Main-header";
 
 function App() {
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
   return (
     <div className="main-page">
-      <MainHeader />
-      <main className="content main-page__content">
-        <ItemsList />
-      </main>
+      <MainHeader onClickOpenDrawer={setIsDrawerOpen} />
+      <Content />
       <Footer />
-      <Drawer />
+      {isDrawerOpen && <Drawer onClose={setIsDrawerOpen}/>}
     </div>
   );
 }

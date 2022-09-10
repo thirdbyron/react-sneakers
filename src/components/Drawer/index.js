@@ -1,13 +1,20 @@
 import { CartItem } from "./Cart-item";
 import styles from './Drawer.module.scss'
 
-export const Drawer = () => {
+export const Drawer = (props) => {
+
+  const onClickedOutClose = (evt) => {
+    if (evt.currentTarget === evt.target) {
+      props.onClose(false);
+    }
+  }
+
   return (
-    <div className={styles.drawer} aria-labelledby="drawer-cart-title" aria-describedby="drawer-cart-content" style={{display: 'none'}} >
-        <dialog className={styles.modal}>
+    <div className={styles.drawer} onClick={onClickedOutClose}>
+        <dialog className={styles.modal} aria-labelledby="drawer-cart-title" aria-describedby="drawer-cart-content">
           <header className={styles.header}>
             <h2 className={styles.title} id="drawer-cart-title">Корзина</h2>
-            <img src="/img/close.svg" alt="close" className={`icon ${styles.closeIcon}`} />
+            <img src="/img/close.svg" alt="close" className={`icon ${styles.closeIcon}`} onClick={() => props.onClose(false)} />
           </header>
           <section className={styles.itemsList} id="drawer-cart-content">
             <CartItem />

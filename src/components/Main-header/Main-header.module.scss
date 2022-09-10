@@ -1,38 +1,47 @@
+.mainHeader {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 40px;
+  padding-right: 60px;
+  border-bottom: 1px lightgray solid;
+}
+
 .leftWrapper {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    justify-items: start;
-    align-items: center;
-  }
+  display: grid;
+  grid-template-columns: auto 1fr;
+  justify-items: start;
+  align-items: center;
+}
 
 .logo {
-    margin-right: 15px;
-  }
+  margin-right: 15px;
+}
 
 .title {
-    text-transform: uppercase;
-  }
+  text-transform: uppercase;
+}
 
 .item {
-    display: grid;
-    align-items: center;
-    padding-left: 40px;
+  display: grid;
+  align-items: center;
+  padding-left: 40px;
 
-    &GridColumn {
-      display: grid;
-      grid-template-columns: auto auto;
-      column-gap: 10px;
-      align-items: center;
-    }
+  &Cart {
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 10px;
+    align-items: center;
   }
+}
 
 .rightWrapper {
-    display: grid;
-    grid-template-columns: 1fr repeat(3, auto);
-    justify-items: end;
-    align-items: center;
-  }
+  display: grid;
+  grid-template-columns: 1fr repeat(3, auto);
+  justify-items: end;
+  align-items: center;
+}
 
 .cartSum {
-    font-size: 14px;
-  }
+  font-size: 14px;
+}

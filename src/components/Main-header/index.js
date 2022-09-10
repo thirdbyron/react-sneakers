@@ -1,8 +1,8 @@
 import styles from './Main-header.module.scss';
 
-export const MainHeader = () => {
+export const MainHeader = (props) => {
   return (
-    <header className="main-page__main-header">
+    <header className={styles.mainHeader}>
       <div className={styles.leftWrapper}>
         <img src="/img/logo.png" alt="logo" className={`logo ${styles.logo}`} />
         <div className={styles.infoWrapper}>
@@ -15,7 +15,7 @@ export const MainHeader = () => {
         </div>
       </div>
       <ul className={styles.rightWrapper}>
-        <li className={`${styles.item} ${styles.itemGridColumn}`}>
+        <li className={`${styles.item} ${styles.itemCart}`} onClick={() => props.onClickOpenDrawer(true)}>
           <img src="/img/cart.svg" alt="cart" className="icon" />
           <span className={styles.cartSum}> 1205 руб. </span>
         </li>

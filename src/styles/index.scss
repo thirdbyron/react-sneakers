@@ -78,6 +78,10 @@ body {
   background-color: transparent;
   border: 1px lightgray solid;
   border-radius: 8px;
+
+  &_hovered {
+    background: linear-gradient(180deg, #89F09C 0%, #3CC755 100%);
+  }
 }
 
 .like-button {
@@ -87,10 +91,10 @@ body {
   background-color: transparent;
   border: 1px lightgray solid;
   border-radius: 7px;
-}
 
-.like-button:hover {
-  background: #FEF0F0;
+  &_hovered {
+    background: #FEF0F0;
+  }
 }
 
 .search {

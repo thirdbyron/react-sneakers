@@ -1,11 +1,11 @@
 import { ItemsList } from "./Items-list";
 import styles from './Content.module.scss';
 
-export const Content = () => {
+export const Content = ({ products }) => {
 
   return (
     <main className={styles.content}>
-      <ItemsList />
+      <ItemsList products={products} />
     </main>
   );
 }

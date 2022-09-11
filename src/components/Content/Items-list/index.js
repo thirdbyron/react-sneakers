@@ -1,35 +1,7 @@
 import { ProductCard } from "./Product-card";
 import styles from './Items-list.module.scss'
 
-const products = [
-  {
-    title: 'Мужские Кроссовки Nike Blazer Mid Suede',
-    price: '12 999 руб.',
-    imgId: '1',
-  },
-  {
-    title: 'Мужские Кроссовки Under Armour Curry 8',
-    price: '8 999 руб.',
-    imgId: '2',
-  },
-  {
-    title: 'Мужские Кроссовки Nike Blazer Mid Suede',
-    price: '8 499 руб.',
-    imgId: '3',
-  },
-  {
-    title: 'Мужские Кроссовки Jordan Air Jordan 11',
-    price: '10 799 руб.',
-    imgId: '4',
-  },
-  {
-    title: 'Мужские Кроссовки Nike LeBron XVIII',
-    price: '16 499 руб.',
-    imgId: '5',
-  },
-]
-
-export const ItemsList = () => {
+export const ItemsList = ({ products }) => {
 
   return (
     <section className={styles.items}>
@@ -49,8 +21,6 @@ export const ItemsList = () => {
             title={product.title}
             imgId={product.imgId}
             price={product.price}
-            onClickAddToCart={() => console.log(product)}
-            onClickAddToFavorite={() => console.log(product)}
           />)}
       </div>
     </section>

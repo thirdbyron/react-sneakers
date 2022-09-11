@@ -1,0 +1,28 @@
+.purchase {
+  display: grid;
+  grid-template-columns: 4fr auto;
+  align-items: center;
+  cursor: pointer;
+  background-color: #9DD458;
+  border-radius: 18px;
+}
+
+.button {
+  cursor: pointer;
+  color: white;
+  height: 55px;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  justify-self: center;
+  padding-left: 20px;
+}
+
+.icon {
+  justify-self: end;
+  padding-right: 20px;
+}
+
+.buttonText {
+  font-size: 18px;
+}

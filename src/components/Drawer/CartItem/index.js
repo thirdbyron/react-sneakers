@@ -1,10 +1,10 @@
-import styles from './Cart-item.module.scss';
+import styles from './CartItem.module.scss';
 
 export const CartItem = () => {
   return (
     <article className={styles.cartItem}>
       <div className={styles.wrapper}>
-        <img src="/img/sneakers/6.jpg" alt="Кроссовки" className="product-img product-img_size_in-cart" />
+        <img src="/img/sneakers/6.jpg" alt="Кроссовки" className={styles.productImg} />
         <div className={styles.middleWrapper}>
           <h5 className={styles.description}>Мужские Кроссовки Nike Blazer Mid Suede</h5>
           <b className={styles.price}>12050 ₽</b>

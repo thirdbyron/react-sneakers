@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { Content } from "./components/Content";
-import { Drawer } from "./components/Drawer";
-import { Footer } from "./components/Footer";
-import { MainHeader } from "./components/Main-header";
+import { Content } from "../Content";
+import { Drawer } from "../Drawer";
+import { Footer } from "../Footer";
+import { MainHeader } from "../MainHeader";
+import styles from './App.module.scss'
 
 function App() {
 
-  const [products, setProducts] = useState([])
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const [products, setProducts] = useState([]);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -19,11 +20,11 @@ function App() {
     }
 
     fetchData();
-  }, [])
+  }, []);
 
-
+  
   return (
-    <div className="main-page">
+    <div className={styles.mainPage}>
       <MainHeader onClickOpenDrawer={setIsDrawerOpen} />
       <Content products={products} />
       <Footer />

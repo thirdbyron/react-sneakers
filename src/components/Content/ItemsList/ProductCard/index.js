@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './Product-card.module.scss';
+import styles from './ProductCard.module.scss';
 
 
 export const ProductCard = (props) => {
@@ -34,7 +34,7 @@ export const ProductCard = (props) => {
   }
 
   const onHeartLeaved = () => {
-      setIsHeartHovered(false);
+    setIsHeartHovered(false);
   }
 
 
@@ -47,9 +47,17 @@ export const ProductCard = (props) => {
           onMouseEnter={onHeartHovered}
           onMouseLeave={onHeartLeaved}
         >
-          <img src={isFavorite ? "/img/favorite-filled.svg" : "/img/favorite.svg"} alt="to-favorite" className="icon icon_size_m" />
+          <img
+            src={isFavorite ? "/img/favorite-filled.svg" : "/img/favorite.svg"}
+            alt="to-favorite"
+            className="icon icon_size_m"
+          />
         </button>
-        <img src={`/img/sneakers/${props.imgId}.jpg`} alt="Кроссовки" className={`product-img product-img_size_card ${styles.productImg}`} />
+        <img
+          src={`/img/sneakers/${props.imgId}.jpg`}
+          alt="Кроссовки"
+          className={`product-img product-img_size_card ${styles.productImg}`}
+        />
         <h5 className={styles.description}>{props.title}</h5>
         <div className={styles.bottomWrapper}>
           <div className={styles.priceWrapper}>
@@ -62,7 +70,11 @@ export const ProductCard = (props) => {
             onMouseEnter={onPlusHovered}
             onMouseLeave={onPlusLeaved}
           >
-            <img src={isInCart ? "/img/done.svg" : "/img/plus.svg"} alt="to-cart" className="icon icon_size_s" />
+            <img
+              src={isInCart ? "/img/done.svg" : "/img/plus.svg"}
+              alt="to-cart"
+              className="icon icon_size_s"
+            />
           </button>
         </div>
       </div>

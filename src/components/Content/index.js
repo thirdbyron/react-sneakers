@@ -1,4 +1,4 @@
-import { ItemsList } from "./Items-list";
+import { ItemsList } from "./ItemsList";
 import styles from './Content.module.scss';
 
 export const Content = ({ products }) => {

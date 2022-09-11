@@ -1,4 +1,4 @@
-import styles from './Main-header.module.scss';
+import styles from './MainHeader.module.scss';
 
 export const MainHeader = (props) => {
   return (
@@ -15,7 +15,10 @@ export const MainHeader = (props) => {
         </div>
       </div>
       <ul className={styles.rightWrapper}>
-        <li className={`${styles.item} ${styles.itemCart}`} onClick={() => props.onClickOpenDrawer(true)}>
+        <li
+          className={`${styles.item} ${styles.itemCart}`}
+          onClick={() => props.onClickOpenDrawer(true)}
+        >
           <img src="/img/cart.svg" alt="cart" className="icon" />
           <span className={styles.cartSum}> 1205 руб. </span>
         </li>

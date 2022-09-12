@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './ProductCard.module.scss';
 
 
-export const ProductCard = ({ title, imgId, price, onAddProductToCart }) => {
+export const ProductCard = ({ title, imgId, price, id, onAddProductToCart }) => {
 
   const [isInCart, setIsInCart] = useState(false);
   const [isPlusHovered, setIsPlusHovered] = useState(false);
@@ -10,8 +10,8 @@ export const ProductCard = ({ title, imgId, price, onAddProductToCart }) => {
   const [isHeartHovered, setIsHeartHovered] = useState(false);
 
   const onAddToCart = () => {
+    onAddProductToCart({title, imgId, price, productId: id});
     setIsInCart(!isInCart);
-    onAddProductToCart({title, imgId, price})
   }
 
   const onPlusHovered = () => {

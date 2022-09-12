@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Content } from "../Content";
 import { Drawer } from "../Drawer";
@@ -13,20 +14,51 @@ function App() {
   const [cartSum, setCartSum] = useState(0);
 
   useEffect(() => {
-    async function fetchData() {
-      const data = await fetch('https://631de283cc652771a48d2626.mockapi.io/sneakers');
+    const fetchData = async () => {
+      try {
+        const sneakersResponse = await axios.get('https://631de283cc652771a48d2626.mockapi.io/products');
 
-      const sneakers = await data.json();
+        const cartResponse = await axios.get('https://631de283cc652771a48d2626.mockapi.io/cart');
 
-      setProducts(sneakers)
+        setProducts(sneakersResponse.data);
+        setCartProducts(cartResponse.data);
+      } catch (err) {
+        throw new Error('Ошибка!');
+      }
     }
 
     fetchData();
   }, []);
 
-  const onAddProductToCart = (newProductInCart) => {
-    setCartProducts((prev) => prev.some((el) => el.imgId === newProductInCart.imgId) ? prev.filter((el) => el.imgId !== newProductInCart.imgId) : [...prev, newProductInCart])
+  const onDeleteProductFromCart = async (deletedProduct) => {
+    try {
+      await axios.delete(`https://631de283cc652771a48d2626.mockapi.io/cart/${deletedProduct.id}`);
+      setCartProducts((prev) => prev.filter((el) => el.productId !== deletedProduct.productId));
+    } catch (err) {
+      throw new Error(err);
+    }
   }
+
+  const onAddProductToCart = async (newProductInCart) => {
+    try {
+      const res = await axios.post('https://631de283cc652771a48d2626.mockapi.io/cart', newProductInCart);
+      setCartProducts((prev) => [...prev, res.data]);
+    } catch (err) {
+      throw new Error(err)
+    }
+  }
+
+  const handleProductInCart = (productToCart) => {
+
+    const productFromServer = cartProducts.find((el) => el.productId === productToCart.productId)
+
+    if (productFromServer) {
+      onDeleteProductFromCart(productFromServer);
+    } else {
+      onAddProductToCart(productToCart);
+    }
+  }
+
 
   useEffect(() => {
     let sum = 0;
@@ -42,9 +74,9 @@ function App() {
   return (
     <div className={styles.mainPage}>
       <MainHeader onClickOpenDrawer={setIsDrawerOpen} cartSum={cartSum} />
-      <Content products={products} onAddProductToCart={onAddProductToCart} />
+      <Content products={products} onAddProductToCart={handleProductInCart} />
       <Footer />
-      {isDrawerOpen && <Drawer onClose={setIsDrawerOpen} cartProducts={cartProducts} cartSum={cartSum}/>}
+      {isDrawerOpen && <Drawer onClose={setIsDrawerOpen} cartProducts={cartProducts} cartSum={cartSum} onDeleteProductFromCart={onDeleteProductFromCart}/>}
     </div>
   );
 }

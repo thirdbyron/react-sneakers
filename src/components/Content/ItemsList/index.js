@@ -16,10 +16,11 @@ export const ItemsList = ({ products, onAddProductToCart }) => {
       product.title.toLowerCase().includes(searchValue.toLowerCase()))
     .map((product) =>
       <ProductCard
-        key={product.imgId}
+        key={product.id}
         title={product.title}
         imgId={product.imgId}
         price={product.price}
+        id={product.id}
         onAddProductToCart={onAddProductToCart}
       />);
 

@@ -4,7 +4,7 @@ import { TAX_RATE } from "../../const";
 import styles from './Drawer.module.scss'
 import { EmptyCart } from "./EmptyCart";
 
-export const Drawer = ({ onClose, cartProducts, cartSum }) => {
+export const Drawer = ({ onClose, cartProducts, cartSum, onDeleteProductFromCart }) => {
 
   const onClickedOutClose = (evt) => {
     if (evt.currentTarget === evt.target) {
@@ -14,10 +14,13 @@ export const Drawer = ({ onClose, cartProducts, cartSum }) => {
 
   const renderCartItems = () => cartProducts.map((product) =>
     <CartItem
-      key={product.imgId}
+      key={product.id}
       title={product.title}
       imgId={product.imgId}
       price={product.price}
+      id={product.id}
+      productId={product.productId}
+      onDeleteProductFromCart={onDeleteProductFromCart}
     />);
 
   return (
@@ -45,10 +48,10 @@ export const Drawer = ({ onClose, cartProducts, cartSum }) => {
                 <span className={styles.detailLine}> </span>
                 <b className={styles.detailPrice}> {`${Math.floor(cartSum * TAX_RATE)} руб.`}  </b>
               </div>
-              <MainButton buttonText="Оформить заказ"/>
+              <MainButton buttonText="Оформить заказ" />
             </section>
           </>
-          : <EmptyCart onClose={onClose}/>
+          : <EmptyCart onClose={onClose} />
         }
       </dialog>
     </div>

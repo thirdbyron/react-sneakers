@@ -1,6 +1,7 @@
 import styles from './MainHeader.module.scss';
 
-export const MainHeader = (props) => {
+export const MainHeader = ({ onClickOpenDrawer, cartSum }) => {
+
   return (
     <header className={styles.mainHeader}>
       <div className={styles.leftWrapper}>
@@ -17,10 +18,10 @@ export const MainHeader = (props) => {
       <ul className={styles.rightWrapper}>
         <li
           className={`${styles.item} ${styles.itemCart}`}
-          onClick={() => props.onClickOpenDrawer(true)}
+          onClick={() => onClickOpenDrawer(true)}
         >
           <img src="/img/cart.svg" alt="cart" className="icon" />
-          <span className={styles.cartSum}> 1205 руб. </span>
+          <span className={styles.cartSum}> {cartSum > 0 ? `${cartSum} руб.` : '0 руб.'} </span>
         </li>
         <li className={styles.item}>
           <img src="/img/favorite.svg" alt="favorite" className="icon" />

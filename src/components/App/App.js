@@ -8,7 +8,9 @@ import styles from './App.module.scss'
 function App() {
 
   const [products, setProducts] = useState([]);
+  const [cartProducts, setCartProducts] = useState([])
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [cartSum, setCartSum] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
@@ -22,13 +24,27 @@ function App() {
     fetchData();
   }, []);
 
-  
+  const onAddProductToCart = (newProductInCart) => {
+    setCartProducts((prev) => prev.some((el) => el.imgId === newProductInCart.imgId) ? prev.filter((el) => el.imgId !== newProductInCart.imgId) : [...prev, newProductInCart])
+  }
+
+  useEffect(() => {
+    let sum = 0;
+    if (cartProducts.length > 0) {
+      cartProducts.forEach((product) => {
+        sum += parseInt(product.price.replace(/[^0-9]/g, ""))
+      });
+    }
+    setCartSum(sum);
+  }, [cartProducts])
+
+
   return (
     <div className={styles.mainPage}>
-      <MainHeader onClickOpenDrawer={setIsDrawerOpen} />
-      <Content products={products} />
+      <MainHeader onClickOpenDrawer={setIsDrawerOpen} cartSum={cartSum} />
+      <Content products={products} onAddProductToCart={onAddProductToCart} />
       <Footer />
-      {isDrawerOpen && <Drawer onClose={setIsDrawerOpen} />}
+      {isDrawerOpen && <Drawer onClose={setIsDrawerOpen} cartProducts={cartProducts} cartSum={cartSum}/>}
     </div>
   );
 }

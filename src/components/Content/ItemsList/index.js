@@ -3,16 +3,15 @@ import styles from './ItemsList.module.scss'
 import { useState } from "react";
 import { Search } from "../../Search";
 
-export const ItemsList = ({ products }) => {
+export const ItemsList = ({ products, onAddProductToCart }) => {
 
   const [searchValue, setSearchValue] = useState('');
 
   const onChangeSearchInput = (evt) => {
     setSearchValue(evt.target.value);
-    console.log(searchValue)
   };
 
-  const filterProductAfterSearch = () => products
+  const renderItems = () => products
     .filter((product) =>
       product.title.toLowerCase().includes(searchValue.toLowerCase()))
     .map((product) =>
@@ -21,6 +20,7 @@ export const ItemsList = ({ products }) => {
         title={product.title}
         imgId={product.imgId}
         price={product.price}
+        onAddProductToCart={onAddProductToCart}
       />);
 
   return (
@@ -35,7 +35,7 @@ export const ItemsList = ({ products }) => {
       />
       <div className={styles.itemsList}>
         {
-          filterProductAfterSearch()
+          renderItems()
         }
       </div>
     </section>

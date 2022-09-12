@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './ProductCard.module.scss';
 
 
-export const ProductCard = (props) => {
+export const ProductCard = ({ title, imgId, price, onAddProductToCart }) => {
 
   const [isInCart, setIsInCart] = useState(false);
   const [isPlusHovered, setIsPlusHovered] = useState(false);
@@ -11,6 +11,7 @@ export const ProductCard = (props) => {
 
   const onAddToCart = () => {
     setIsInCart(!isInCart);
+    onAddProductToCart({title, imgId, price})
   }
 
   const onPlusHovered = () => {
@@ -54,15 +55,15 @@ export const ProductCard = (props) => {
           />
         </button>
         <img
-          src={`/img/sneakers/${props.imgId}.jpg`}
+          src={`/img/sneakers/${imgId}.jpg`}
           alt="Кроссовки"
           className={`product-img product-img_size_card ${styles.productImg}`}
         />
-        <h5 className={styles.description}>{props.title}</h5>
+        <h5 className={styles.description}>{title}</h5>
         <div className={styles.bottomWrapper}>
           <div className={styles.priceWrapper}>
             <span className={styles.priceTitle}>Цена: </span>
-            <b className={styles.price}>{props.price}</b>
+            <b className={styles.price}>{price}</b>
           </div>
           <button
             className={`cart-button ${isInCart || isPlusHovered ? "cart-button_hovered" : ""}`}

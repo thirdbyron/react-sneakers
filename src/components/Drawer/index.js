@@ -1,8 +1,8 @@
-import { MainButton } from "../MainButton";
+import { MainButton } from "../generic/MainButton";
 import { CartItem } from "./CartItem";
 import { TAX_RATE } from "../../const";
 import styles from './Drawer.module.scss'
-import { EmptyCart } from "./EmptyCart";
+import { EmptySection } from "../generic/EmptySection";
 
 export const Drawer = ({ onClose, cartProducts, cartSum, onDeleteProductFromCart }) => {
 
@@ -15,13 +15,13 @@ export const Drawer = ({ onClose, cartProducts, cartSum, onDeleteProductFromCart
   const renderCartItems = () => cartProducts.map((product) =>
     <CartItem
       key={product.id}
-      title={product.title}
-      imgId={product.imgId}
-      price={product.price}
-      id={product.id}
-      productId={product.productId}
+      {...product}
       onDeleteProductFromCart={onDeleteProductFromCart}
+      cartProducts={cartProducts}
     />);
+
+
+  console.log(cartProducts)
 
   return (
     <div className={styles.drawer} onClick={onClickedOutClose}>
@@ -51,7 +51,14 @@ export const Drawer = ({ onClose, cartProducts, cartSum, onDeleteProductFromCart
               <MainButton buttonText="Оформить заказ" />
             </section>
           </>
-          : <EmptyCart onClose={onClose} />
+          : <EmptySection
+            onClose={onClose}
+            imgType="cart"
+            title="Корзина пуста"
+            description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
+            position={{padding: "0px 30px 60px 30px"}}
+            linkTo={null}
+          />
         }
       </dialog>
     </div>

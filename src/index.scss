@@ -3,6 +3,7 @@ body {
   padding: 0;
   font-family: 'Roboto', sans-serif;
   background-color: rgb(229, 252, 244);
+
   h1,
   h2,
   h3,
@@ -22,7 +23,17 @@ body {
   button {
     padding: 0px;
   }
+
+  a:active,
+  a:hover,
+  a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+  }
 }
+
+
+
 
 
 .logo {
@@ -57,7 +68,9 @@ body {
   background-color: transparent;
   border: 1px lightgray solid;
   border-radius: 8px;
-
+  display: grid;
+  align-items: center;
+  justify-items: center;
   &_hovered {
     background: linear-gradient(180deg, #89F09C 0%, #3CC755 100%);
   }
@@ -75,6 +88,3 @@ body {
     background: #FEF0F0;
   }
 }
-
-
-

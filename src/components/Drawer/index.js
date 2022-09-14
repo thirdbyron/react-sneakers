@@ -3,8 +3,24 @@ import { CartItem } from "./CartItem";
 import { TAX_RATE } from "../../const";
 import styles from './Drawer.module.scss'
 import { EmptySection } from "../generic/EmptySection";
+import { useEffect, useState } from "react";
+import { Icon } from "@iconify/react";
 
-export const Drawer = ({ onClose, cartProducts, cartSum, onDeleteProductFromCart }) => {
+export const Drawer = ({ onClose, cartProducts, cartSum, onDeleteProductFromCart, onDeleteAllProductsFromCart, isPurchased }) => {
+
+  const [isPurchaseButtonDisabled, setIsPruchaseButtonDisabled] = useState(false)
+
+  useEffect(() => {
+    setIsPruchaseButtonDisabled(false);
+  }, [isPurchased])
+
+
+  const onPurchase = () => {
+    if (!isPurchaseButtonDisabled) {
+      onDeleteAllProductsFromCart(cartProducts);
+      setIsPruchaseButtonDisabled(true);
+    }
+  }
 
   const onClickedOutClose = (evt) => {
     if (evt.currentTarget === evt.target) {
@@ -48,15 +64,20 @@ export const Drawer = ({ onClose, cartProducts, cartSum, onDeleteProductFromCart
                 <span className={styles.detailLine}> </span>
                 <b className={styles.detailPrice}> {`${Math.floor(cartSum * TAX_RATE)} руб.`}  </b>
               </div>
-              <MainButton buttonText="Оформить заказ" />
+              <div onClick={onPurchase} style={isPurchaseButtonDisabled ? {display: "grid", alignItems: "center", justifyItems: "center", padding: "10px"} : {}}>
+                {isPurchaseButtonDisabled ?
+                  <Icon icon="eos-icons:bubble-loading" width="40px" />
+                  :
+                  <MainButton buttonText="Оформить заказ" />}
+              </div>
             </section>
           </>
           : <EmptySection
             onClose={onClose}
-            imgType="cart"
-            title="Корзина пуста"
-            description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
-            position={{padding: "0px 30px 60px 30px"}}
+            imgType={isPurchased ? "purchase" : "cart"}
+            title={isPurchased ? "Заказ оформлен!" : "Корзина пуста"}
+            description={isPurchased ? "Ваш заказ скоро будет передан курьерской доставке" : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."}
+            position={{ padding: "0px 30px 60px 30px" }}
             linkTo={null}
           />
         }

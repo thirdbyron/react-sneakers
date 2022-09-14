@@ -5,10 +5,15 @@ import { Footer } from "../Footer";
 import { MainHeader } from "../MainHeader";
 import styles from './MainLayout.module.scss'
 
-export const MainLayout = ({ cartProducts, onDeleteProductFromCart }) => {
+export const MainLayout = ({ cartProducts, onDeleteProductFromCart, onDeleteAllProductsFromCart, isPurchased, setIsPurchased }) => {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [cartSum, setCartSum] = useState(0);
+
+  const closeDrawer = () => {
+    setIsPurchased(false);
+    setIsDrawerOpen(false);
+  }
 
   useEffect(() => {
     let sum = 0;
@@ -33,10 +38,12 @@ export const MainLayout = ({ cartProducts, onDeleteProductFromCart }) => {
 
       {isDrawerOpen &&
         <Drawer
-          onClose={setIsDrawerOpen}
+          onClose={closeDrawer}
           cartProducts={cartProducts}
           cartSum={cartSum}
           onDeleteProductFromCart={onDeleteProductFromCart}
+          onDeleteAllProductsFromCart={onDeleteAllProductsFromCart}
+          isPurchased={isPurchased}
         />
       }
     </div>

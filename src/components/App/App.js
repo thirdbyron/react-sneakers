@@ -11,6 +11,7 @@ function App() {
   const [cartProducts, setCartProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isPurchased, setIsPurchased] = useState(false)
 
 
   useEffect(() => {
@@ -35,6 +36,19 @@ function App() {
 
     fetchData();
   }, []);
+
+  const onDeleteAllProductsFromCart = async (cartProducts) => {
+    try {
+      for (const product of cartProducts) {
+        await axios.delete(`https://631de283cc652771a48d2626.mockapi.io/cart/${product.id}`)
+      }
+     
+      setCartProducts([]);
+      setIsPurchased(true);
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
 
   const onDeleteProductFromCart = async (deletedProduct) => {
     try {
@@ -98,6 +112,9 @@ function App() {
         <MainLayout
           cartProducts={cartProducts}
           onDeleteProductFromCart={onDeleteProductFromCart}
+          onDeleteAllProductsFromCart={onDeleteAllProductsFromCart}
+          isPurchased={isPurchased}
+          setIsPurchased={setIsPurchased}
         />}
       >
         <Route index element={
